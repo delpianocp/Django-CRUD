@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% block content %}
+<center>
+<h2 class="display-3">Formulario de Registro</h2>
+</center><br><br>
+<div class="container">
+  <div class="row row-cols-3">
+    <div class="col"></div>
+    <div class="col">
+      <form action= "" method="POST">
+      {% csrf_token %}
+        <label for="fname">Nombre de Usuario:</label><br>
+        <input type="text" id="nameuser" name="nameuser" value="Usuario"><br>
+        <label for="lname">Contraseña:</label><br>
+        <input type="password" id="password" name="password" value="Pass1"><br>
+        <label for="lname">Repita Contraseña:</label><br>
+        <input type="password" id="password2" name="password2" value="Pass2"><br><br>
+        <input type="submit" value="Registrarse">
+      </form>
+      {{ error }} 
+
+    </div>
+    <div class="col"></div>
+    
+  </div>
+</div>
+
+
+{% endblock %}

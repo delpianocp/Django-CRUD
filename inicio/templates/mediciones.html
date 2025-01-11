@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<br><br>
+<form action= "" method="POST">
+  {% csrf_token %}
+  
+    <input type="datetime-local" id="fecha_medicion" name="fecha_medicion">
+    <input type="submit" value="buscar Medicion" name="buscar">&emsp;&emsp;&emsp;&emsp;&emsp;
+     
+    
+          <select id="sector" name="sector">
+            <option value="sistemas">Sistemas</option>
+            <option value="mantenimiento">Mantenimiento</option>
+            <option value="seguridad">Seguridad</option>
+            <option value="servidor">Servidor</option>
+          </select>
+          <input type="submit" value="buscar Sector" name="buscar">
+          
+    </form><br><br>
+
+
+<center>
+<h1 class="display-6" style="aling: center">Mediciones</h1>
+</center><br><br>
+<center>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th scope="col">Id</th>
+        <th scope="col">Sector</th>
+        <th scope="col">Ampere</th>
+        <th scope="col">Fecha</th>
+        <th scope="col">Tecnico</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for medicion in mediciones %}    
+      <tr>
+        <th scope="row">{{ medicion.id }}</th>
+        <td>{{ medicion.sector }}</td>
+        <td>{{ medicion.medida }}</td>
+        <td>{{ medicion.fecha_hora }}</td>
+        <td>{{ medicion.tecnico }}</td>
+        <td> <a  href="{% url 'medida' medicion.id %}"><button type="button" class="btn btn-success">Ver</button></a> </td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</center>
+{% endblock %}
+

@@ -1,0 +1,71 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+
+<center>
+    
+    </center><br><br>
+        <div class="container">
+          <div class="row row-cols-3">
+            <div class="col">
+                <h1 class="display-4" style="aling: center">Medicion</h1>
+                <div class="card" style="width: 18rem;">
+                    <div class="card-body">
+                      <h5 class="card-title">{{ medida.medida }} Amperes</h5>
+                      <h6 class="card-subtitle mb-2 text-body-secondary">Sector: {{ medida.sector }}</h6>
+                      <p class="card-text">{{ medida.fecha_hora }}</p>
+                      <a href="#" class="card-link">Tecnico: {{ medida.tecnico }}</a><br><br>
+                      {% if user.is_authenticated %}                                 
+                      <form action= "" method="POST">
+                        {% csrf_token %} 
+                      
+                      <input type="submit" value="Eliminar" name="boton">
+                      </form>
+                        {% else %}
+                        <p>Debe iniciar sesion para modificar</p>
+                        {% endif %}
+                    </div>
+                </div>
+
+            </div>
+            <div class="col">
+                <h1 class="display-4" style="aling: center">Modificar </h1>
+              <form action= "" method="POST">
+              {% csrf_token %}
+              
+              <label for="sector">Sector:</label><br>
+              <select id="sector" name="sector">
+                <option value="{{ medida.sector }}">{{ medida.sector }}</option>
+                <option value="sistemas">Sistemas</option>
+                <option value="mantenimiento">Mantenimiento</option>
+                <option value="seguridad">Seguridad</option>
+                <option value="servidor">Servidor</option>
+              </select><br><br>
+                <label for="medicion">Medicion (AMP):</label><br>
+                <input type="text" id="medicion" name="medicion" value="{{ medida.medida }}"><br><br>
+                <label for="fecha_medicion">{{ medida.fecha_hora }}</label><br><br>
+                {% if mesage %}
+                <p>{{ mesage }} </p>
+                {% endif %}
+                {% if user.is_authenticated %}
+                <input type="submit" value="Modificar" name="boton">
+                {% else %}
+                <p>Debe iniciar sesion para modificar</p>
+                {% endif %}
+              </form>
+    
+            </div>
+            <div class="col"></div>
+            
+          </div>
+        </div>
+
+
+
+
+
+
+
+{% endblock %}
+
